@@ -16,9 +16,12 @@ export class RoomsComponent implements OnInit {
   }
 
   roomsList: Room[] = []
-  
 
   hideRooms = false
+
+  selectedRoom!: Room
+
+  title = 'Room List'
 
   constructor(){}
 
@@ -59,9 +62,27 @@ export class RoomsComponent implements OnInit {
 
   toggle(){
     this.hideRooms = !this.hideRooms
+    this.title = 'Rooms List'
   }
 
   selectRoom(room: Room) {
     console.log(room)
+    this.selectedRoom = room
+  }
+
+  addRoom() {
+    const room: Room = {
+      roomNumber: 4,
+      roomType: 'Deluxe Queen Room',
+      amenities: 'Air Conditioner, Free Wifi, TV, Bathroom, Kitchen',
+      price: 180,
+      photos: "https://unsplash.com/photos/xFv7VJxNkLg",
+      checkinTime: new Date("2022-05-01T14:00:00Z"),
+      checkoutTime: new Date("2022-05-03T12:00:00Z"),
+      rating: 4.1
+    }
+
+    // this.roomsList.push(room)
+    this.roomsList = [...this.roomsList, room]
   }
 }
