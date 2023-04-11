@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component,  OnInit, ViewChild } from '@angular/core';
 import { RoomsStatus, Room } from './rooms';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   hotelName = "Hilton"
 
   rooms: RoomsStatus = {
@@ -22,6 +23,8 @@ export class RoomsComponent implements OnInit {
   selectedRoom!: Room
 
   title = 'Room List'
+
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
   constructor(){}
 
@@ -59,6 +62,15 @@ export class RoomsComponent implements OnInit {
       }
     ];
   }
+
+  ngAfterViewInit(): void {
+    this.headerComponent.title = "Rooms View"
+  }
+
+  ngAfterViewChecked(): void {
+    
+  }
+
 
   toggle(){
     this.hideRooms = !this.hideRooms
